@@ -1,0 +1,111 @@
+<html>
+ 
+<div class="bg-container">
+    <div class="col-6">
+        <div class="imgcontainer">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRvElKuTI24zrCp98HpOItNk4JOUCHctm_TBQ&usqp=CAU"
+            alt="pension" class="pension">
+        </div>
+        <form>
+            <div class="form-group">
+                <label><b>Aadhar Number</b></label>
+                <input type="text" class="form-control" name="aadharNumber" [(ngModel)] = "aadharNumber" required/>
+            </div>
+
+            <div>
+                <button type="button" (click) = onPensionClick() class="btn btn-primary">Get pension details</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <button type="button" (click) = onPensionerClick() class="btn btn-primary">Get pensioner details</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <button type="button" (click) = onSavePensionerClick() class="btn btn-primary">Add/Update this pensioner</button>
+            </div>
+        </form>
+        <app-pension-details *ngIf = "getpensiondetailclicked && !gotAuthorizationError && !gotAadharError" 
+        [pensionDetails] = "pensionDetails"></app-pension-details>
+        <app-pensioner-details *ngIf = "getpensionerdetailsclicked && !gotAuthorizationError && !gotAadharError" 
+        [pensionerDetails]="pensionerDetails"></app-pensioner-details>
+        <app-error-details *ngIf = "gotAuthorizationError || gotAadharError"
+        [gotAadharError] = "gotAadharError"
+        [gotAuthorizationError] = "gotAuthorizationError"></app-error-details>
+        <button *ngIf = "gotAuthorizationError || gotAadharError" (click) = "tryAgain()" class="btn btn-primary">Try Again</button>
+        <div *ngIf = "addingPensioner && !gotAuthorizationError" class="container">
+            <h1 class="text-primary">
+                 Add Pensioner
+            </h1>
+            <div class="col-6">
+                <form #pensionerForm = "ngForm">
+                    &nbsp;&nbsp;&nbsp;&nbsp;
+                    <div class="form-group">
+                        <label>Name</label>
+                        <input type="text" class="form-control" name = "name"  [(ngModel)] = "name" required/>
+                    </div>
+                    &nbsp;&nbsp;&nbsp;&nbsp;
+                    <div class="form-group">
+                        <label>Date of Birth</label>
+                        <input type="date" class="form-control" max="1964-08-31" name = "dateob"  [(ngModel)] = "dob">
+                    </div>
+                    &nbsp;&nbsp;&nbsp;&nbsp;
+                    <div class="form-group">
+                        <label>Pan Number</label>
+                        <input type="text" class="form-control" name="pan" [(ngModel)] = "panNumber"/>
+                    </div>
+                    &nbsp;&nbsp;&nbsp;&nbsp;
+                    <div class="form-group">
+                        <label>Salary Earned</label>
+                        <input type="text" class="form-control" name="salary" [(ngModel)] = "salaryEarned" required/>
+                    </div>
+                    &nbsp;&nbsp;&nbsp;&nbsp;
+                    <div class="form-group">
+                        <label>Allowances</label>
+                        <input type="text" class="form-control" name="allowances" [(ngModel)] = "allowances" required/>
+                    </div>
+                    &nbsp;&nbsp;&nbsp;&nbsp;
+                    <div class="form-group">
+                        <label>Pension Type</label>&nbsp;&nbsp;
+                        <input type="radio" name = "pensionType" value="self" [(ngModel)] = "pensionType" required/>Self
+                        &nbsp;&nbsp;
+                        <input type="radio" name = "pensionType" value="family" [(ngModel)] = "pensionType" required/>Family
+                    </div>
+                    &nbsp;&nbsp;&nbsp;&nbsp;
+                    <div class="form-group">
+                        <label>Bank account number</label>
+                        <input type="text" class="form-control" name = "bankAccountNumber"  [(ngModel)] = "bankAccountNumber" required/>
+                    </div>
+                    &nbsp;&nbsp;&nbsp;&nbsp;
+                    <div class="form-group">
+                        <label>Bank Name</label>
+                        <input type="text" class="form-control" name = "bankName" [(ngModel)] = "bankName" required/>
+                    </div>
+                    &nbsp;&nbsp;&nbsp;&nbsp;
+                    <div class="form-group">
+                        <label>Bank Type</label>&nbsp;&nbsp;
+                        <input type="radio" name = "bankType" value="private" [(ngModel)] = "bankType" required/>Private
+                        &nbsp;&nbsp;
+                        <input type="radio" name = "bankType" value="public"  [(ngModel)] = "bankType" required/>Public
+                    </div>
+                    <br>
+                    <button type="submit" class="btn btn-primary" (click) = "addPensioner()">Submit</button>
+                     &nbsp;&nbsp;
+                    <button class="btn btn-danger" (click) = onCancel()>Cancel</button>
+                </form>
+            </div>
+            <div *ngIf = "detailsSaved" class="container">
+                <h1 class="text-primary">
+                    Success Message!!!
+                </h1>
+                <br>
+                <hr>
+                <div class="success">
+                    Pensioner is saved successfully!!!
+                </div>
+                
+                
+            </div>
+            
+            <hr>
+        </div>
+        
+    </div>
+</div>
+
+</html>

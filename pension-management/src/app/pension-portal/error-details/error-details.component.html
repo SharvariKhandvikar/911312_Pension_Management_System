@@ -1,0 +1,17 @@
+
+<div class="container">
+    <h1 class="text-primary">
+        Error Details!!!
+    </h1>
+    <br>
+    <hr>
+    <table>
+    <div *ngIf = "gotAuthorizationError" class="container">
+        You are not Authoried to access this details!!!
+    </div>
+    <div *ngIf = "gotAadharError" class="container">
+        Invalid pensioner detail provided, please provide valid detail!!!
+    </div>
+</table>
+    <hr>
+</div>
