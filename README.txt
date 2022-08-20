@@ -14,7 +14,7 @@ This folder contains the backend of the web application including 3 microservice
 	| user1  | user1  |
 	| user2  | user2  |
 	| user3  | user3  |
-	| user4  | user4	|
+	| user4  | user4  |
 	| user5  | user5  |
 
 
